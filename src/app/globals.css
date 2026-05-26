@@ -1,0 +1,55 @@
+:root {
+  --background: #eef4f7;
+  --foreground: #0f2537;
+  --muted: #4a6172;
+  --panel: #ffffff;
+}
+
+html {
+  height: 100%;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: var(--foreground);
+  background:
+    radial-gradient(circle at 14% 10%, #d8ecf8 0%, transparent 42%),
+    radial-gradient(circle at 88% 4%, #ffe2bd 0%, transparent 36%),
+    var(--background);
+  font-family: var(--font-space-grotesk), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-merriweather), serif;
+}
+
+.appShell {
+  width: min(1200px, 96vw);
+  margin: 16px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Veiculo {
+  id_veiculo Int          @id
+  placa      String       @unique @db.Char(7)
+  modelo     String       @db.VarChar(45)
+  km_atual   Float
+  documento  Documento?
+  manutencao Manutencao[]
+  viagem     Viagem[]
+
+  @@map("Veiculo")
+}
+
+model Motorista {
+  id_motorista   Int      @id
+  nome           String   @db.VarChar(100)
+  cpf            String   @unique @db.Char(11)
+  cnh_categoria  String   @db.VarChar(2)
+  viagem         Viagem[]
+
+  @@map("Motorista")
+}
+
+model Rota {
+  id_rota      Int      @id
+  destino      String   @db.VarChar(45)
+  distancia_km Float
+  viagem       Viagem[]
+
+  @@map("Rota")
+}
+
+model Documento {
+  id_doc            Int      @id
+  num_licenca       String   @unique @db.VarChar(20)
+  vencimento        DateTime @db.Date
+  Veiculo_idVeiculo Int      @unique
+  veiculo           Veiculo  @relation(fields: [Veiculo_idVeiculo], references: [id_veiculo], onDelete: Restrict, onUpdate: Cascade)
+
+  @@map("Documento")
+}
+
+model Manutencao {
+  id_manutencao     Int      @id
+  descricao         String   @db.Text
+  valor_total       Decimal  @db.Decimal(10, 2)
+  Veiculo_idVeiculo Int
+  veiculo           Veiculo  @relation(fields: [Veiculo_idVeiculo], references: [id_veiculo], onDelete: Restrict, onUpdate: Cascade)
+
+  @@map("Manutencao")
+}
+
+model Viagem {
+  idMotorista Int
+  idVeiculo   Int
+  idRota      Int
+  motorista   Motorista @relation(fields: [idMotorista], references: [id_motorista], onDelete: Restrict, onUpdate: Cascade)
+  veiculo     Veiculo   @relation(fields: [idVeiculo], references: [id_veiculo], onDelete: Restrict, onUpdate: Cascade)
+  rota        Rota      @relation(fields: [idRota], references: [id_rota], onDelete: Restrict, onUpdate: Cascade)
+
+  @@id([idMotorista, idVeiculo, idRota])
+  @@map("Viagem")
+}
