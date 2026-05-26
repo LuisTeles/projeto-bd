@@ -106,15 +106,8 @@ CREATE TRIGGER trg_viagem_atualiza_km
 AFTER INSERT ON Viagem
 FOR EACH ROW
 BEGIN
-  DECLARE v_distancia FLOAT;
-
-  SELECT r.distancia_km
-    INTO v_distancia
-    FROM Rota r
-   WHERE r.id_rota = NEW.idRota;
-
   UPDATE Veiculo v
-     SET v.km_atual = v.km_atual + v_distancia
+     SET v.km_atual = v.km_atual + (SELECT distancia_km FROM Rota WHERE id_rota = NEW.idRota)
    WHERE v.id_veiculo = NEW.idVeiculo;
 END$$
 
@@ -124,15 +117,6 @@ CREATE PROCEDURE sp_registrar_manutencao (
   IN p_valor_total DECIMAL(10,2)
 )
 BEGIN
-  IF NOT EXISTS (
-    SELECT 1
-      FROM Veiculo v
-     WHERE v.id_veiculo = p_veiculo_id
-  ) THEN
-    SIGNAL SQLSTATE '45000'
-      SET MESSAGE_TEXT = 'Veiculo inexistente para registro de manutencao.';
-  END IF;
-
   INSERT INTO Manutencao (descricao, valor_total, Veiculo_idVeiculo)
   VALUES (p_descricao, p_valor_total, p_veiculo_id);
 END$$
