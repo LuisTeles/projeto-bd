@@ -23,6 +23,16 @@
   color: #446070;
 }
 
+.presentationGrid {
+  display: grid;
+  gap: 18px;
+}
+
+.presentationMain {
+  display: grid;
+  gap: 18px;
+}
+
 .form {
   display: flex;
   gap: 10px;

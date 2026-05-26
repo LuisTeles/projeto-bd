@@ -7,6 +7,7 @@ import styles from "./TopNav.module.css";
 
 const NAV_ITEMS = [
     { href: APP_ROUTES.DASHBOARD, label: "Dashboard" },
+    { href: APP_ROUTES.DIAGRAMA, label: "Diagrama" },
     { href: APP_ROUTES.VEICULOS, label: "Veiculos" },
     { href: APP_ROUTES.MOTORISTAS, label: "Motoristas" },
 ] as const;

@@ -5,6 +5,7 @@ export const DATABASE_CONSTANTS = {
 
 export const APP_ROUTES = {
     DASHBOARD: "/",
+    DIAGRAMA: "/diagrama",
     VEICULOS: "/veiculos",
     MOTORISTAS: "/motoristas",
     API_VIAGENS: "/api/viagens",

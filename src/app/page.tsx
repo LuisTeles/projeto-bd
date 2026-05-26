@@ -1,4 +1,7 @@
 import { DataTable, type DataColumn } from "@/components/fleet/DataTable";
+import { DashboardStats } from "@/components/fleet/DashboardStats";
+import { PresentationDiagram } from "@/components/fleet/PresentationDiagram";
+import { SqlSections } from "@/components/fleet/SqlSections";
 import { UI_TEXT } from "@/constants/ui";
 import { listRelatorioViagens } from "@/services/fleet-service";
 import type { RelatorioViagem } from "@/types/fleet";
@@ -22,12 +25,37 @@ const DASHBOARD_COLUMNS: Array<DataColumn<RelatorioViagem>> = [
 
 export default async function Home() {
   const viagens = await listRelatorioViagens();
+  const totalVeiculos = new Set(viagens.map((viagem) => viagem.id_veiculo)).size;
+  const totalMotoristas = new Set(
+    viagens.map((viagem) => viagem.id_motorista),
+  ).size;
+  const totalViagens = viagens.length;
+  const mediaDistancia =
+    totalViagens === 0
+      ? 0
+      : viagens.reduce((sum, viagem) => sum + Number(viagem.distancia_km), 0) /
+        totalViagens;
 
   return (
     <main className={styles.page}>
       <section className={styles.hero}>
         <h2>{UI_TEXT.DASHBOARD_TITLE}</h2>
         <p>{UI_TEXT.DASHBOARD_SUBTITLE}</p>
+      </section>
+
+      <section className={styles.presentationGrid}>
+        <div className={styles.presentationMain}>
+          <DashboardStats
+            totalVeiculos={totalVeiculos}
+            totalMotoristas={totalMotoristas}
+            totalViagens={totalViagens}
+            mediaDistancia={mediaDistancia}
+          />
+
+          <SqlSections />
+
+          <PresentationDiagram compact />
+        </div>
       </section>
 
       <DataTable

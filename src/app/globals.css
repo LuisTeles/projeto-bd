@@ -17,16 +17,25 @@ body {
 
 body {
   min-height: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
   color: var(--foreground);
-  background:
-    radial-gradient(circle at 14% 10%, #d8ecf8 0%, transparent 42%),
-    radial-gradient(circle at 88% 4%, #ffe2bd 0%, transparent 36%),
-    var(--background);
+  background: var(--background);
   font-family: var(--font-space-grotesk), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 14% 10%, #d8ecf8 0%, transparent 42%),
+    radial-gradient(circle at 88% 4%, #ffe2bd 0%, transparent 36%);
 }
 
 h1,
