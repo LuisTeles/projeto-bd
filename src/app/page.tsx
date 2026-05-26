@@ -1,5 +1,5 @@
-import { DataTable, type DataColumn } from "@/components/fleet/DataTable";
 import { DashboardStats } from "@/components/fleet/DashboardStats";
+import { DataTable, type DataColumn } from "@/components/fleet/DataTable";
 import { PresentationDiagram } from "@/components/fleet/PresentationDiagram";
 import { SqlSections } from "@/components/fleet/SqlSections";
 import { UI_TEXT } from "@/constants/ui";
@@ -34,7 +34,7 @@ export default async function Home() {
     totalViagens === 0
       ? 0
       : viagens.reduce((sum, viagem) => sum + Number(viagem.distancia_km), 0) /
-        totalViagens;
+      totalViagens;
 
   return (
     <main className={styles.page}>
