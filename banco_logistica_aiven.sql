@@ -2,12 +2,10 @@
 -- Script para ambiente gerenciado (Aiven MySQL)
 -- Execute conectado ao banco alvo (ex.: frota_logistica)
 
--- Limpeza idempotente de objetos programaveis
 DROP TRIGGER IF EXISTS trg_viagem_atualiza_km;
 DROP VIEW IF EXISTS vw_relatorio_viagens;
 DROP PROCEDURE IF EXISTS sp_registrar_manutencao;
 
--- Limpeza idempotente de tabelas
 DROP TABLE IF EXISTS Viagem;
 DROP TABLE IF EXISTS Manutencao;
 DROP TABLE IF EXISTS Documento;
