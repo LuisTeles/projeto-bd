@@ -53,6 +53,8 @@ Se estiver usando o ambiente configurado para Aiven, utilize:
 SOURCE banco_logistica_aiven.sql;
 ```
 
+Observacao sobre Aiven: o script inclui criacao de role e usuarios. Se sua conta nao tiver permissao para `CREATE ROLE` ou `CREATE USER`, execute o script com credenciais administrativas ou solicite provisionamento ao administrador mantendo os mesmos nomes de role e usuarios.
+
 2. Crie o arquivo `.env.local` com base em `.env.example`:
 
 ```env
@@ -100,3 +102,22 @@ npm run dev
 ## Nota de Entrega
 
 O arquivo SQL exigido pelo trabalho permanece na raiz do repositorio com o nome `banco_logistica.sql`.
+
+## Validacao dos Requisitos de Seguranca
+
+Depois de executar o SQL, valide usuarios, role e privilegios:
+
+```sql
+SELECT User, Host
+FROM mysql.user
+WHERE User IN ('operador_frota_1', 'operador_frota_2');
+
+SHOW GRANTS FOR 'operador_frota_1'@'%';
+SHOW GRANTS FOR 'operador_frota_2'@'%';
+```
+
+Opcionalmente, conecte com um usuario operador e confirme a role ativa:
+
+```sql
+SELECT CURRENT_ROLE();
+```

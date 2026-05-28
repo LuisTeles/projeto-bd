@@ -175,6 +175,20 @@ INSERT INTO Viagem (idMotorista, idVeiculo, idRota) VALUES
   (4, 4, 4),
   (5, 5, 5);
 
+-- 4) Role, usuarios e privilegios
+CREATE ROLE IF NOT EXISTS role_logistica;
+
+GRANT SELECT, INSERT ON frota_logistica.* TO role_logistica;
+
+CREATE USER IF NOT EXISTS 'operador_frota_1'@'%' IDENTIFIED BY 'Log@2026User1';
+CREATE USER IF NOT EXISTS 'operador_frota_2'@'%' IDENTIFIED BY 'Log@2026User2';
+
+GRANT role_logistica TO 'operador_frota_1'@'%';
+GRANT role_logistica TO 'operador_frota_2'@'%';
+
+SET DEFAULT ROLE role_logistica TO 'operador_frota_1'@'%';
+SET DEFAULT ROLE role_logistica TO 'operador_frota_2'@'%';
+
 -- Consultas uteis de validacao rapida:
 -- SELECT * FROM vw_relatorio_viagens;
 -- CALL sp_registrar_manutencao(1, 'Troca preventiva de correia', 430.00);

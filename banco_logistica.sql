@@ -199,3 +199,7 @@ SET DEFAULT ROLE role_logistica TO 'operador_frota_2'@'%';
 -- Consultas uteis de validacao rapida:
 -- SELECT * FROM vw_relatorio_viagens;
 -- CALL sp_registrar_manutencao(1, 'Troca preventiva de correia', 430.00);
+-- SELECT User, Host FROM mysql.user WHERE User IN ('operador_frota_1', 'operador_frota_2');
+-- SHOW GRANTS FOR 'operador_frota_1'@'%';
+-- SHOW GRANTS FOR 'operador_frota_2'@'%';
+-- SELECT CURRENT_ROLE();
