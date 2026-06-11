@@ -225,7 +225,6 @@ public class SistemaService {
         }
     }
 
-
     //MANUTENÇÕES
     public void InserirManutencao(String descricao, double valorTotal, int idVeiculo) {
         MANUTENCAO m = new MANUTENCAO(0, descricao, valorTotal, idVeiculo); // ID será gerado pelo banco
